@@ -5,10 +5,24 @@ export type UAInfo = {
   brand: string;
 };
 
-export function parseUA(ua: string): UAInfo {
+type ParseUAOptions = {
+  mobileHint?: string | null;
+  platformHint?: string | null;
+};
+
+function normalizeHintValue(value?: string | null) {
+  if (!value) return "";
+  return value.replace(/"/g, "").trim();
+}
+
+export function parseUA(ua: string, options: ParseUAOptions = {}): UAInfo {
+  const mobileHint = normalizeHintValue(options.mobileHint);
+  const platformHint = normalizeHintValue(options.platformHint);
+
   let deviceType = "Computador";
   if (/Tablet|iPad/i.test(ua)) deviceType = "Tablet";
-  else if (/Mobi|Android/i.test(ua)) deviceType = "Celular";
+  else if (mobileHint === "?1" || /Mobi|Android|iPhone|iPod/i.test(ua)) deviceType = "Celular";
+  else if (/Android|iOS/i.test(platformHint)) deviceType = "Celular";
 
   let os = "Desconhecido";
   if (/Windows/i.test(ua)) os = "Windows";
@@ -16,6 +30,11 @@ export function parseUA(ua: string): UAInfo {
   else if (/Android/i.test(ua)) os = "Android";
   else if (/iPhone|iPad|iPod/i.test(ua)) os = "iOS";
   else if (/Linux/i.test(ua)) os = "Linux";
+  else if (/Windows/i.test(platformHint)) os = "Windows";
+  else if (/macOS|Mac/i.test(platformHint)) os = "macOS";
+  else if (/Android/i.test(platformHint)) os = "Android";
+  else if (/iOS/i.test(platformHint)) os = "iOS";
+  else if (/Linux/i.test(platformHint)) os = "Linux";
 
   let browser = "Desconhecido";
   if (/Edg\//i.test(ua)) browser = "Edge";

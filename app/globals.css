@@ -55,6 +55,7 @@ h1 {
   border: 1px solid var(--olive-dim);
   border-radius: 4px;
   color: var(--paper);
+  text-decoration: none;
   font-size: 15px; font-weight: 500;
   background: transparent;
   font-family: inherit;

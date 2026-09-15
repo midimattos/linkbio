@@ -3,9 +3,26 @@ import { getSupabaseAdmin } from "@/lib/supabaseAdmin";
 import { parseUA } from "@/lib/parseUA";
 
 export async function POST(req: NextRequest) {
-  const body = await req.json().catch(() => ({} as any));
+  const rawBody = await req.text().catch(() => "");
+  let body: any = {};
+  if (rawBody) {
+    try {
+      body = JSON.parse(rawBody);
+    } catch {
+      const form = new URLSearchParams(rawBody);
+      body = {
+        tipo: form.get("tipo"),
+        link: form.get("link"),
+        referrer: form.get("referrer"),
+      };
+    }
+  }
+
   const ua = req.headers.get("user-agent") || "";
-  const info = parseUA(ua);
+  const info = parseUA(ua, {
+    mobileHint: req.headers.get("sec-ch-ua-mobile"),
+    platformHint: req.headers.get("sec-ch-ua-platform"),
+  });
   const ip =
     req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
     req.headers.get("x-real-ip") ||
