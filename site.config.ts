@@ -3,6 +3,6 @@ export const siteConfig = {
   bio: "'Não tema, pois eu o resgatei; Eu o chamei pelo nome; você é meu'",
   initials: "MM",
   links: [
-    { label: "twitter", url: "x.com/itswattega" },
+    { label: "twitter", url: "https://x.com/itswattega" },
   ],
 };
