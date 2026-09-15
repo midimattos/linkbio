@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --bg: #0A0B08;
+  --bg-2: #14160F;
+  --olive: #8A9A5B;
+  --olive-dim: #4B5632;
+  --paper: #EDEDE3;
+  --paper-dim: #9A9C8D;
+  --danger: #B5654A;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--paper);
+  font-family: 'Inter', sans-serif;
+  min-height: 100vh;
+}
+
+.page {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto;
+  padding: 48px 20px 24px;
+}
+
+.avatar {
+  width: 84px; height: 84px; border-radius: 50%;
+  background: var(--bg-2);
+  border: 1px solid var(--olive);
+  margin: 0 auto 18px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Fraunces', serif; font-size: 28px;
+  color: var(--olive);
+}
+
+h1 {
+  font-family: 'Fraunces', serif; font-weight: 600;
+  font-size: 26px; text-align: center; margin: 0 0 6px;
+}
+
+.bio {
+  text-align: center; color: var(--paper-dim); font-size: 14px;
+  margin: 0 0 32px; line-height: 1.5;
+}
+
+.links { display: flex; flex-direction: column; gap: 12px; }
+
+.linkBtn {
+  display: block; width: 100%;
+  padding: 15px 20px;
+  border: 1px solid var(--olive-dim);
+  border-radius: 4px;
+  color: var(--paper);
+  font-size: 15px; font-weight: 500;
+  background: transparent;
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color .15s ease, background .15s ease;
+  text-align: center;
+}
+.linkBtn:hover { border-color: var(--olive); background: rgba(138,154,91,0.08); }
+.linkBtn:active { transform: scale(0.99); }
+
+.consent {
+  margin-top: 40px;
+  border-top: 1px solid rgba(237,237,227,0.12);
+  padding-top: 16px;
+  font-size: 12px;
+  color: var(--paper-dim);
+  line-height: 1.6;
+  text-align: center;
+}
+.consent button {
+  margin-top: 10px;
+  background: none;
+  border: 1px solid var(--paper-dim);
+  color: var(--paper);
+  padding: 6px 16px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  font-family: inherit;
+}
+.consent button:hover { border-color: var(--olive); }
+
+/* Admin */
+.admin { max-width: 900px; }
+.admin h2 { font-family: 'Fraunces', serif; font-weight: 600; font-size: 22px; margin-bottom: 4px; }
+.admin p.sub { color: var(--paper-dim); font-size: 13px; margin: 0 0 24px; }
+
+.loginBox {
+  max-width: 340px; margin: 80px auto; padding: 0 20px;
+}
+.loginBox h2 { font-family: 'Fraunces', serif; font-size: 22px; margin-bottom: 20px; }
+.loginBox input {
+  width: 100%; padding: 12px 14px; margin-bottom: 12px;
+  background: var(--bg-2); border: 1px solid var(--olive-dim);
+  border-radius: 4px; color: var(--paper); font-size: 14px; font-family: inherit;
+}
+.loginBox button {
+  width: 100%; padding: 12px; border-radius: 4px;
+  background: var(--olive); border: none; color: #0A0B08;
+  font-weight: 600; font-size: 14px; cursor: pointer; font-family: inherit;
+}
+.loginBox .error { color: var(--danger); font-size: 13px; margin-bottom: 12px; }
+
+.stats { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 24px; }
+.stat { background: var(--bg-2); border-radius: 6px; padding: 14px 18px; min-width: 120px; }
+.stat .n { font-family: 'Fraunces', serif; font-size: 24px; color: var(--olive); }
+.stat .l { font-size: 12px; color: var(--paper-dim); }
+
+table { width: 100%; border-collapse: collapse; font-size: 12px; }
+th { text-align: left; color: var(--paper-dim); font-weight: 500; padding: 8px 10px; border-bottom: 1px solid rgba(237,237,227,0.15); white-space: nowrap; }
+td { padding: 8px 10px; border-bottom: 1px solid rgba(237,237,227,0.06); white-space: nowrap; }
+.tablewrap { overflow-x: auto; border: 1px solid rgba(237,237,227,0.12); border-radius: 6px; }
+
+.topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+.logoutBtn, .clearBtn {
+  background: none; border: 1px solid var(--olive-dim); color: var(--paper);
+  padding: 8px 16px; border-radius: 4px; font-size: 13px; cursor: pointer; font-family: inherit;
+}
+.clearBtn { border-color: var(--danger); color: var(--danger); margin-top: 20px; }
+.logoutBtn:hover { border-color: var(--olive); }
+
+.empty { color: var(--paper-dim); font-size: 13px; padding: 20px; text-align: center; }
