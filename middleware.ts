@@ -3,10 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 export function middleware(req: NextRequest) {
   const cookie = req.cookies.get("admin_session")?.value;
   if (cookie !== process.env.ADMIN_PASSWORD) {
-    const loginUrl = req.nextUrl.clone();
-    loginUrl.pathname = "/admin";
-    loginUrl.search = "";
-    return NextResponse.redirect(loginUrl);
+    return NextResponse.redirect(new URL("/admin", req.url));
   }
   return NextResponse.next();
 }
