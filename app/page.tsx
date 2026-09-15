@@ -48,7 +48,6 @@ export default function Home() {
       {!consented && (
         <div className="consent">
           <br />
-          <button onClick={accept}>Entendi</button>
         </div>
       )}
     </main>
