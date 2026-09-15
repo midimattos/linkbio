@@ -47,8 +47,6 @@ export default function Home() {
       </div>
       {!consented && (
         <div className="consent">
-          Esta página coleta dados de navegação (tipo de dispositivo, aproximação de
-          localização, origem do acesso) para fins estatísticos.
           <br />
           <button onClick={accept}>Entendi</button>
         </div>
