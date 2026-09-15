@@ -12,6 +12,8 @@ type EventRow = {
   so: string | null;
   navegador: string | null;
   marca: string | null;
+  idioma: string | null;
+  ip: string | null;
   cidade: string | null;
   regiao: string | null;
   pais: string | null;
@@ -26,6 +28,8 @@ const COLS: (keyof EventRow)[] = [
   "marca",
   "so",
   "navegador",
+  "idioma",
+  "ip",
   "cidade",
   "regiao",
   "pais",
@@ -97,7 +101,13 @@ export default function Dashboard() {
             <tbody>
               {events.map((row) => (
                 <tr key={row.id}>
-                  {COLS.map((c) => <td key={c}>{(row[c] as any) ?? "—"}</td>)}
+                  {COLS.map((c) => {
+                    if (c === "created_at") {
+                      const d = new Date(row.created_at);
+                      return <td key={c}>{isNaN(d.getTime()) ? row.created_at : d.toLocaleString("pt-BR")}</td>;
+                    }
+                    return <td key={c}>{(row[c] as any) ?? "—"}</td>;
+                  })}
                 </tr>
               ))}
             </tbody>

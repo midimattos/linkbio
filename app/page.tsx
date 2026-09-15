@@ -14,11 +14,20 @@ export default function Home() {
     }
   }, []);
 
-  function track(tipo: string, link?: string) {
+  function track(tipo: string, link?: string, preferBeacon = false) {
+    const payload = { tipo, link, referrer: document.referrer || null };
+    const body = JSON.stringify(payload);
+
+    if (preferBeacon && typeof navigator !== "undefined" && typeof navigator.sendBeacon === "function") {
+      const blob = new Blob([body], { type: "application/json" });
+      if (navigator.sendBeacon("/api/track", blob)) return;
+    }
+
     fetch("/api/track", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ tipo, link, referrer: document.referrer || null }),
+      body,
+      keepalive: preferBeacon,
     }).catch(() => {});
   }
 
@@ -29,7 +38,7 @@ export default function Home() {
   }
 
   function handleClick(label: string, url: string) {
-    if (consented) track("clique", label);
+    if (consented) track("clique", label, true);
     window.open(url, "_blank");
   }
 
@@ -47,7 +56,11 @@ export default function Home() {
       </div>
       {!consented && (
         <div className="consent">
-          <br />
+          <p>
+            Para registrar estatísticas de visita e clique (como data, hora, localização, IP, dispositivo e navegador),
+            aceite a coleta de dados.
+          </p>
+          <button onClick={accept}>Aceitar coleta</button>
         </div>
       )}
     </main>
