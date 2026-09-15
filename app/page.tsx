@@ -37,9 +37,8 @@ export default function Home() {
     track("visita");
   }
 
-  function handleClick(label: string, url: string) {
-    if (consented) track("clique", label, true);
-    window.open(url, "_blank");
+  function handleClick(url: string) {
+    if (consented) track("clique", url, true);
   }
 
   return (
@@ -49,9 +48,16 @@ export default function Home() {
       <p className="bio">{siteConfig.bio}</p>
       <div className="links">
         {siteConfig.links.map((l) => (
-          <button key={l.label} className="linkBtn" onClick={() => handleClick(l.label, l.url)}>
+          <a
+            key={l.label}
+            className="linkBtn"
+            href={l.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => handleClick(l.url)}
+          >
             {l.label}
-          </button>
+          </a>
         ))}
       </div>
       {!consented && (
