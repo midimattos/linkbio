@@ -63,10 +63,9 @@ export default function Home() {
       {!consented && (
         <div className="consent">
           <p>
-            Para registrar estatísticas de visita e clique (como data, hora, localização, IP, dispositivo e navegador),
-            aceite a coleta de dados.
+
           </p>
-          <button onClick={accept}>Aceitar coleta</button>
+
         </div>
       )}
     </main>
